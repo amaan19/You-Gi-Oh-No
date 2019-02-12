@@ -31,6 +31,9 @@ module API
           game.users.push(user2)
           game.save
         end
+        patch ":id", root: "game" do
+          game = Game.find(params[:id])
+        end
       end
     end
   end
