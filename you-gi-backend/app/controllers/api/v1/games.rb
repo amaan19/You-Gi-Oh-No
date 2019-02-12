@@ -16,14 +16,20 @@ module API
             game"
         end
         get ":id", root: "game" do
-          game = Games.where(id: permitted_params[:id]).first!
+          game = Game.where(id: permitted_params[:id]).first!
           #deck = user.deck
           #present :cards, with: API::V1::Entities::Card
         end
         post do
-          user = User.new(name: params[:name])
-          user.deck = Deck.find(params[:deck_id])
-          user.save
+          game = Game.new()
+          user1 = User.find(params[:user_1])
+          user2 = User.find(params[:user_2])
+          gamestate = Gamestate.new(player1_id: user1.id, player2_id: user2.id, p1life: 4000, p2life:4000, p1deck: user1.deck.cards.ids, p2deck: user2.deck.cards.ids)
+          gamestate.save
+          game.gamestate = gamestate
+          game.users.push(user1)
+          game.users.push(user2)
+          game.save
         end
       end
     end

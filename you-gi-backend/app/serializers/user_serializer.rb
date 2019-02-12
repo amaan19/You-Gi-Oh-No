@@ -3,9 +3,10 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :name, :deck,
   
   def deck
-    {deck_name: self.object.deck.name,
-    deck_id: self.object.deck.id,
-    cards: self.object.deck.cards.map do |card|
+    if self.object.deck != nil
+      {deck_name: self.object.deck.name,
+      deck_id: self.object.deck.id,
+      cards: self.object.deck.cards.map do |card|
       {
         name: card.name,
         desc: card.desc,
@@ -18,8 +19,9 @@ class UserSerializer < ActiveModel::Serializer
         image_url: card.image_url
 
       }
-    end
+      end
   }
+    end
   end
 
 
