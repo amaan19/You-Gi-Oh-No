@@ -24,7 +24,7 @@ module API
           game = Game.new()
           user1 = User.find(params[:user_1])
           user2 = User.find(params[:user_2])
-          gamestate = Gamestate.new(player1_id: user1.id, player2_id: user2.id, p1life: 4000, p2life:4000, p1deck: user1.deck.cards.ids, p2deck: user2.deck.cards.ids)
+          gamestate = Gamestate.new(player1_id: user1.id, player2_id: user2.id, p1life: 4000, p2life:4000, p1deck: user1.deck.cards.ids, p2deck: user2.deck.cards.ids, p1deckid: user1.deck.id, p2deckid: user2.deck.id)
           gamestate.save
           game.gamestate = gamestate
           game.users.push(user1)
@@ -34,7 +34,10 @@ module API
         patch ":id", root: "game" do
           game = Game.find(params[:id])
           game.gamestate.update(params)
-
+        end
+        put ":id", root: "game" do
+          game = Game.find(params[:id])
+          game.gamestate.update(params)
         end
       end
     end
