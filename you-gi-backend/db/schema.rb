@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_13_135346) do
+ActiveRecord::Schema.define(version: 2019_02_14_104034) do
 
   create_table "cards", force: :cascade do |t|
     t.integer "deck_id"
@@ -55,6 +55,8 @@ ActiveRecord::Schema.define(version: 2019_02_13_135346) do
     t.integer "turn"
     t.integer "p1deckid"
     t.integer "p2deckid"
+    t.integer "p1field"
+    t.integer "p2field"
   end
 
   create_table "user_games", force: :cascade do |t|
