@@ -37,6 +37,7 @@ module API
         end
         put ":id", root: "game" do
           game = Game.find(params[:id])
+        
           game.gamestate.update(params)
         end
       end
