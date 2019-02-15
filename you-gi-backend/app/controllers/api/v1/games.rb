@@ -33,11 +33,20 @@ module API
         end
         patch ":id", root: "game" do
           game = Game.find(params[:id])
+          
+          params["p1deck"] = JSON.parse params["p1deck"]
+          byebug
           game.gamestate.update(params)
         end
         put ":id", root: "game" do
           game = Game.find(params[:id])
-        
+          params[:p1deck] = params[:p1deck].to_json
+          params[:p1hand] = params[:p1hand].to_json
+          params[:p1field] = params[:p1field].to_json
+          params[:p2deck] = params[:p2deck].to_json
+          params[:p2hand] = params[:p2hand].to_json
+          params[:p2field] = params[:p2field].to_json
+          # byebug
           game.gamestate.update(params)
         end
       end
